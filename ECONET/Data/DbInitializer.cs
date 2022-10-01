@@ -1,4 +1,4 @@
-﻿using ECONET.Entities;
+﻿/*using ECONET.Entities;
 
 namespace ECONET.Data
 {
@@ -14,7 +14,7 @@ namespace ECONET.Data
                 var context = serviceScope.ServiceProvider.GetService<MarketContext>();
 
                 context.Database.EnsureCreated();
-                //Cinema
+                //Items
                 if (!context.Items.Any())
                 {
                     context.Items.AddRange(new List<Item>()
@@ -24,7 +24,12 @@ namespace ECONET.Data
                             Id = 1,
                             Name = "T-shirt",
                         },
-                    
+                        new Item()
+                        {
+                            Id = 2,
+                            Name = "Trousers",
+                        },
+
                     });
                     context.SaveChanges();
                    
@@ -33,5 +38,11 @@ namespace ECONET.Data
             }
 
         }
+
+        internal void initialize(WebApplication app)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
+*/

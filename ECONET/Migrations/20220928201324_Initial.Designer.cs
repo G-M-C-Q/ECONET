@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECONET.Migrations
 {
     [DbContext(typeof(MarketContext))]
-    [Migration("20220814154548_Initial")]
+    [Migration("20220928201324_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

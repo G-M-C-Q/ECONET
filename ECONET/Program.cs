@@ -30,3 +30,15 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+/*/AppDbInitializer.Seed(app);
+void SeedDatabase() //can be placed at the very bottom under app.Run()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbInitializer = scope.ServiceProvider.GetRequiredService<DbInitializer>();
+        dbInitializer.initialize(app);
+    }
+}
+***/

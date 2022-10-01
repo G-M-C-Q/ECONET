@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ECONET.Data;
+using ECONET.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ECONET.Controllers
 {
@@ -6,11 +9,19 @@ namespace ECONET.Controllers
     [Route("api/[controller]")]
     public class ItemsController : ControllerBase
     {
+        private readonly MarketContext _context;
+        public ItemsController(MarketContext context)
+        {
+            _context = context;
+        }
+
         [HttpGet]
 
-        public string GetItems()
+        public async Task<ActionResult<List<Item>>> GetItems()
         {
-            return "this will be a list of seller items";
+            var items = await _context.Items.ToListAsync(); 
+
+            return Ok(items);   
         }
 
         [HttpGet("{id}")]
@@ -20,3 +31,4 @@ namespace ECONET.Controllers
         }
     }
 }
+ 
