@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿#nullable disable
 
-#nullable disable
+using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ECONET.Migrations
+namespace Infrastructuree.Migrations
 {
     public partial class Initial : Migration
     {

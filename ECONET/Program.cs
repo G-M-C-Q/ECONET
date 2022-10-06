@@ -1,14 +1,20 @@
-using ECONET.Data;
+using Core.Interfaces;
+using Infrastructuree.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 
 // Add services to the container.
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<MarketContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString") ?? throw new InvalidOperationException("Connection string not found.")));
+
+//Services configuration methods
+builder.Services.AddScoped<IItemRepository, ItemRepository>();
+builder.Services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
+
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -32,13 +38,3 @@ app.MapControllers();
 app.Run();
 
 
-/*/AppDbInitializer.Seed(app);
-void SeedDatabase() //can be placed at the very bottom under app.Run()
-{
-    using (var scope = app.Services.CreateScope())
-    {
-        var dbInitializer = scope.ServiceProvider.GetRequiredService<DbInitializer>();
-        dbInitializer.initialize(app);
-    }
-}
-***/
