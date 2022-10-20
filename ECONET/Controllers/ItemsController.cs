@@ -1,15 +1,17 @@
-﻿using Core.Entities;
+﻿using AutoMapper;
+using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
+using ECONET.Controllers;
+using ECONET.DTO;
 using Infrastructuree.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructuree.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ItemsController : ControllerBase
+    
+    public class ItemsController : BaseApiController
     {
       
         /// Type Parameter
@@ -17,9 +19,11 @@ namespace Infrastructuree.Controllers
         private readonly IGenericRepository<Item> _itemsRepo;
         private readonly IGenericRepository<ItemBrand> _itemBrandRepo;
         private readonly IGenericRepository<ItemCategory> _itemCategoryRepo;
+        private readonly IMapper _mapper;
         public ItemsController(IGenericRepository<Item> itemsRepo,
-            IGenericRepository<ItemBrand> itemBrandRepo, IGenericRepository<ItemCategory> itemCategoryRepo)
+            IGenericRepository<ItemBrand> itemBrandRepo, IGenericRepository<ItemCategory> itemCategoryRepo, IMapper mapper)
         {
+            _mapper = mapper;
             _itemsRepo = itemsRepo;
             _itemBrandRepo = itemBrandRepo;
             _itemCategoryRepo = itemCategoryRepo;
@@ -28,24 +32,27 @@ namespace Infrastructuree.Controllers
 
         [HttpGet]
         //
-        public async Task<ActionResult<List<Item>>> GetItems()
+        public async Task<ActionResult<List<ItemToReturnDto>>> GetItems()
         {
             var spec = new ItemsWithCategoriesAndBrandsSpecififcation();
-
+            //Database
             var items = await _itemsRepo.ListAsync(spec);
+            //Properties from item to List In memory
+            return Ok(_mapper.Map<IReadOnlyList<Item>, IReadOnlyList<ItemToReturnDto>>(items));
 
-            return Ok(items);   
         }
 
      
         //Utilises the Constructor that takes a parameter and using this constructor 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Item>> GetItem(int id)
+        public async Task<ActionResult<ItemToReturnDto>> GetItem(int id)
         {
 
             var spec = new ItemsWithCategoriesAndBrandsSpecififcation(id);
 
-            return await _itemsRepo.GetEntityWithSpec(spec);
+           //return dto
+           var item = await _itemsRepo.GetEntityWithSpec(spec);
+            return _mapper.Map<Item, ItemToReturnDto>(item);
         }
 
         //return directly 
@@ -62,5 +69,20 @@ namespace Infrastructuree.Controllers
         {
             return Ok(await _itemCategoryRepo.ListAllAsync());
         }
+
+        //create product fix method 
+        //[HttpPost("item")]
+       // public async Task<ActionResult> Create(Item)
+       // {
+          //  return Ok(await _itemsRepo.AddNewItemAsync(item));
+        //}
+
+
+        //deleteProduct method 
+
+        //UpdateProduct method
+        
+
+
     }
 }

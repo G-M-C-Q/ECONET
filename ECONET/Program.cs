@@ -1,4 +1,5 @@
 using Core.Interfaces;
+using ECONET.Helpers;
 using Infrastructuree.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,7 @@ builder.Services.AddDbContext<MarketContext>(options => options.UseSqlServer(bui
 
 //Services configuration methods
 builder.Services.AddScoped<IItemRepository, ItemRepository>();
+builder.Services.AddAutoMapper(typeof(MappingProfiles));
 builder.Services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
 
 
@@ -30,6 +32,8 @@ if (app.Environment.IsDevelopment())
 } 
 
 app.UseHttpsRedirection();
+//root folder images
+app.UseStaticFiles();
 
 app.UseAuthorization();
 
