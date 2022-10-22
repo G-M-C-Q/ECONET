@@ -1,3 +1,6 @@
+global using EconetBlazor.Shared;
+global using System.Net.Http.Json;
+global using EconetBlazor.Client.Services.ProductService;
 using EconetBlazor.Client;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
