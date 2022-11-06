@@ -49,13 +49,15 @@ else
         }
     }
 
-
+    
+    /// test returns product id instead of task id
+ 
     private async Task AddToCart()
     {
-        var product = ProductService.GetProduct(Id);
+        var result = await ProductService.GetProduct(Id);
         var cartItem = new CartItem
             {
-                ProductId = product.Id
+                ProductId = result.Data.Id
 
             };
 
