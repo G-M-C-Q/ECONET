@@ -2,7 +2,9 @@
 global using EconetBlazor.Shared;
 global using Microsoft.EntityFrameworkCore;
 global using EconetBlazor.Server.Data;
-using EconetBlazor.Server.Services.ProductService;
+global using EconetBlazor.Server.Services.ProductService;
+global using EconetBlazor.Server.Services.CategoryService;
+global using EconetBlazor.Server.Services.CartService;
 using Microsoft.AspNetCore.ResponseCompression;
 
 
@@ -19,7 +21,11 @@ builder.Services.AddRazorPages();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//Services
+
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICartService, CartService>();
 
 var app = builder.Build();
 

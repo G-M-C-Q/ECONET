@@ -1,5 +1,6 @@
 ﻿@page "/product/{id:int}"
 @inject IProductService ProductService
+@inject ICartService CartService
 
 @if (product == null)
 {
@@ -14,25 +15,31 @@ else
         <div class="media-body">
             <h2 class="mb-0">@product.Title</h2>
             <p>@product.Description</p>
-            <h4 class="price">
-                $@product.Price
-            </h4>
+   
+          
+                <h4 class="price">
+                    $@product.Price
+                </h4>
+            
+            <button class="btn btn-primary" @onclick="AddToCart">
+                <i class="oi oi-cart"></i>&nbsp;&nbsp;&nbsp;Add to Cart
+            </button>
         </div>
     </div>
 
 }
-
 @code {
     private Product? product = null;
     private string message = string.Empty;
 
+
+
+
     [Parameter]
     public int Id { get; set; }
-
     protected override async Task OnParametersSetAsync()
     {
-        message = "Loading product...";
-
+        message = "RANDOM";
         var result = await ProductService.GetProduct(Id);
         if (!result.Success)
         {
@@ -43,4 +50,16 @@ else
             product = result.Data;
         }
     }
+
+    public int ProductId;
+    private async Task AddToCart()
+    {
+        var result = await ProductService.GetProduct(Id);
+        var cartItem = new CartItem();
+        {
+            ProductId = result.Data.Id;
+        }
+        await CartService.AddToCart(cartItem);
+    }
 }
+ 

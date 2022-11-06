@@ -3,6 +3,7 @@ using EconetBlazor.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EconetBlazor.Server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221022202837_Moreproducts")]
+    partial class Moreproducts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,9 +79,6 @@ namespace EconetBlazor.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Featured")
-                        .HasColumnType("bit");
-
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -103,7 +102,6 @@ namespace EconetBlazor.Server.Migrations
                             Id = 1,
                             CategoryId = 2,
                             Description = "blue and white striped relaxed fit trousers - super summery and slouched - size 10, could fit a small 12",
-                            Featured = true,
                             ImageUrl = "https://th.bing.com/th/id/OIP.qimv_2tIcl5A_u_k4iURGAHaLH?pid=ImgDet&rs=1",
                             Price = 9.99m,
                             Title = "Trousers"
@@ -113,7 +111,6 @@ namespace EconetBlazor.Server.Migrations
                             Id = 2,
                             CategoryId = 1,
                             Description = "If you want to look like a banana buy this jumper",
-                            Featured = true,
                             ImageUrl = "https://xcdn.next.co.uk/Common/Items/Default/Default/ItemImages/AltItemShot/315x472/T76851s.jpg",
                             Price = 7.99m,
                             Title = "Jumper"
@@ -123,7 +120,6 @@ namespace EconetBlazor.Server.Migrations
                             Id = 3,
                             CategoryId = 2,
                             Description = "denim straight leg trousers with logo loop on the back.",
-                            Featured = false,
                             ImageUrl = "https://i5.walmartimages.com/asr/fb7c02b1-6dbe-4c09-808b-03481f62e9f9.d5b7c792e2fe17292f76c76bfd8149b1.jpeg",
                             Price = 6.99m,
                             Title = "Jeans"
@@ -133,7 +129,6 @@ namespace EconetBlazor.Server.Migrations
                             Id = 4,
                             CategoryId = 3,
                             Description = "Red Sundress",
-                            Featured = false,
                             ImageUrl = "https://xcdn.next.co.uk/COMMON/Items/Default/Default/ItemImages/AltItemShot/315x472/A57518s.jpg",
                             Price = 15.50m,
                             Title = "Sun Dress"
@@ -143,7 +138,6 @@ namespace EconetBlazor.Server.Migrations
                             Id = 5,
                             CategoryId = 1,
                             Description = "Cream Cropped Jumper, High neckline",
-                            Featured = false,
                             ImageUrl = "https://media3.newlookassets.com/i/newlook/821129816/womens/clothing/knitwear/blue-vanilla-stone-cable-knit-roll-neck-crop-jumper.jpg?strip=true&qlt=80&w=720",
                             Price = 4.50m,
                             Title = "Cropped Jumper"
@@ -153,7 +147,6 @@ namespace EconetBlazor.Server.Migrations
                             Id = 6,
                             CategoryId = 2,
                             Description = "Black faux leather pant",
-                            Featured = true,
                             ImageUrl = "https://th.bing.com/th/id/R.bc70a7d3ed0d142eab927ca61b63916b?rik=rticQCYYDgN9wg&pid=ImgRaw&r=0",
                             Price = 9.99m,
                             Title = "Pleather Pants"
@@ -163,7 +156,6 @@ namespace EconetBlazor.Server.Migrations
                             Id = 7,
                             CategoryId = 3,
                             Description = "Midnight Blue Satin Midi dress",
-                            Featured = true,
                             ImageUrl = "https://th.bing.com/th/id/OIP.HT8GDy8mfo8AcGa5BSS4YAHaLz?pid=ImgDet&rs=1",
                             Price = 12.00m,
                             Title = "Midi Dress"
@@ -173,7 +165,6 @@ namespace EconetBlazor.Server.Migrations
                             Id = 8,
                             CategoryId = 3,
                             Description = "Little black dress with sequin detail",
-                            Featured = false,
                             ImageUrl = "https://img.promgirl.com/_img/PGPRODUCTS/2270536/1000/black-dress-SOP-D17733LCS-b.jpg",
                             Price = 9.99m,
                             Title = "LBD"
@@ -181,9 +172,8 @@ namespace EconetBlazor.Server.Migrations
                         new
                         {
                             Id = 9,
-                            CategoryId = 1,
+                            CategoryId = 2,
                             Description = "Pink Turtleneck Jumper",
-                            Featured = true,
                             ImageUrl = "https://tommy-europe.scene7.com/is/image/TommyEurope/KG0KG06895_TZO_main?$main$",
                             Price = 6.00m,
                             Title = "Turtle neck"

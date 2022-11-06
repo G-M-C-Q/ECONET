@@ -1,0 +1,13 @@
+﻿@inject NavigationManager NavigationManager
+
+<button @onclick="GoToIndex"
+        class="btn btn-outline-primary index-button">
+    EcoMart
+</button>
+
+@code {
+    private void GoToIndex()
+    {
+        NavigationManager.NavigateTo("");
+    }
+}
