@@ -31,9 +31,7 @@ else
 @code {
     private Product? product = null;
     private string message = string.Empty;
-
-
-
+    private int currentId = 1;
 
     [Parameter]
     public int Id { get; set; }
@@ -51,15 +49,16 @@ else
         }
     }
 
-    public int ProductId;
+
     private async Task AddToCart()
     {
-        var result = await ProductService.GetProduct(Id);
-        var cartItem = new CartItem();
-        {
-            ProductId = result.Data.Id;
-        }
+        var product = ProductService.GetProduct(Id);
+        var cartItem = new CartItem
+            {
+                ProductId = product.Id
+
+            };
+
         await CartService.AddToCart(cartItem);
     }
 }
- 
