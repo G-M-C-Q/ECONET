@@ -18,7 +18,7 @@ else
    
           
                 <h4 class="price">
-                    $@product.Price
+                    €@product.Price
                 </h4>
             
             <button class="btn btn-primary" @onclick="AddToCart">
@@ -31,7 +31,7 @@ else
 @code {
     private Product? product = null;
     private string message = string.Empty;
-    private int currentId = 1;
+
 
     [Parameter]
     public int Id { get; set; }

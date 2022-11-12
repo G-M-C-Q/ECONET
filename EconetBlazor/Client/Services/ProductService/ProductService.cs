@@ -41,16 +41,14 @@
 
         public async Task<List<string>> GetProductSearchSuggestions(string searchText)
         {
-            var result = await _http
-                .GetFromJsonAsync<ServiceResponse<List<string>>>($"api/product/searchsuggestions/{searchText}");
+            var result = await _http.GetFromJsonAsync<ServiceResponse<List<string>>>($"api/product/searchsuggestions/{searchText}");
             return result.Data;
         }
 
         public async Task SearchProducts(string searchText, int page)
         {
             LastSearchText = searchText;
-            var result = await _http
-                 .GetFromJsonAsync<ServiceResponse<ProductSearchResult>>($"api/product/search/{searchText}/{page}");
+            var result = await _http.GetFromJsonAsync<ServiceResponse<ProductSearchResult>>($"api/product/search/{searchText}/{page}");
             if (result != null && result.Data != null)
             {
                 Products = result.Data.Products;
