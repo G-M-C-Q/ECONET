@@ -1,6 +1,9 @@
-﻿<Router AppAssembly="@typeof(App).Assembly">
+﻿<CascadingAuthenticationState>
+    
+<Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
-      <RouteView RouteData="@routeData" DefaultLayout="@typeof(AppLayout)" />
+        <!--specific content displays only if user is authorized-->
+      <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(AppLayout)" />
         <FocusOnNavigate RouteData="@routeData" Selector="h1" />
     </Found>
     <NotFound>
@@ -10,3 +13,5 @@
         </LayoutView>
     </NotFound>
 </Router>
+
+</CascadingAuthenticationState>
