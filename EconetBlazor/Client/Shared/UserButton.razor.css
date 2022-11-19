@@ -13,3 +13,8 @@
 .dropdown-item:hover {
     background-color: white;
 }
+
+.btn0-info {
+    background-color: none;
+    color: #619F28;
+}
