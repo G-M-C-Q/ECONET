@@ -3,22 +3,29 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 
+
 namespace EconetBlazor.Server.Services.AuthService
 { 
    public class AuthService : IAuthService
     {
     private readonly AppDbContext _context;
     private readonly IConfiguration _configuration;
-    
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public AuthService(AppDbContext context, IConfiguration configuration)
-    {
-        _context = context;
-        _configuration = configuration;
-       
-    }
 
-    public async Task<ServiceResponse<string>> Login(string email, string password)
+        public AuthService(AppDbContext context,
+            IConfiguration configuration,
+            IHttpContextAccessor httpContextAccessor)
+        {
+            _context = context;
+            _configuration = configuration;
+            _httpContextAccessor = httpContextAccessor;
+
+        }
+
+        public int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+        public async Task<ServiceResponse<string>> Login(string email, string password)
     {
         var response = new ServiceResponse<string>();
         var user = await _context.Users
