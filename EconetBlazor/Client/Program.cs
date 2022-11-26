@@ -10,7 +10,7 @@ using EconetBlazor.Client;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Blazored.LocalStorage;
-using EconetBlazor.Client.Services.CartService;
+
 
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
