@@ -4,6 +4,7 @@ using EconetBlazor.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EconetBlazor.Server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221202144811_Address")]
+    partial class Address
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,9 +95,6 @@ namespace EconetBlazor.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -103,9 +102,6 @@ namespace EconetBlazor.Server.Migrations
                     b.Property<string>("Url")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Visible")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -115,26 +111,20 @@ namespace EconetBlazor.Server.Migrations
                         new
                         {
                             Id = 1,
-                            Deleted = false,
                             Name = "Knitwear",
-                            Url = "knitwear",
-                            Visible = true
+                            Url = "knitwear"
                         },
                         new
                         {
                             Id = 2,
-                            Deleted = false,
                             Name = "Trousers",
-                            Url = "trousers",
-                            Visible = true
+                            Url = "trousers"
                         },
                         new
                         {
                             Id = 3,
-                            Deleted = false,
                             Name = "Dresses",
-                            Url = "dresses",
-                            Visible = true
+                            Url = "dresses"
                         });
                 });
 
@@ -331,10 +321,6 @@ namespace EconetBlazor.Server.Migrations
                     b.Property<byte[]>("PasswordSalt")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
