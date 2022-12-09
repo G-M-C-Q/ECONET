@@ -4,11 +4,13 @@
 
 .top-row {
     height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(255,255,255);
 }
 
-.navbar-brand {
-    font-size: 1.1rem;
+.btn-info {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    color: #2D5930;
 }
 
 .oi {
@@ -41,14 +43,14 @@
     }
 
 .nav-item ::deep a.active {
-    background-color: rgba(255,255,255,0.25);
-    color: white;
+    background-color: rgba(155,204,2142,0.25);
+    color:#4fa339;
 }
 
-.nav-item ::deep a:hover {
-    background-color: rgba(255,255,255,0.1);
-    color: white;
-}
+        .nav-item ::deep a:hover {
+            background-color: rgba(155,204,2142,0.25);
+            color: 9bcc8e;
+        }
 
 @media (min-width: 641px) {
     .navbar-toggler {

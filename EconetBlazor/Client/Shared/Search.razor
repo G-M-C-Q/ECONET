@@ -22,6 +22,7 @@
         </button>
     </div>
 </div>
+
 @code {
     private string searchText = string.Empty;
     private List<string> suggestions = new List<string>();
@@ -37,7 +38,7 @@
 
     public void SearchProducts()
     {
-       NavigationManager.NavigateTo($"search/{searchText}/1");
+        NavigationManager.NavigateTo($"search/{searchText}/1");
     }
 
     public async Task HandleSearch(KeyboardEventArgs args)

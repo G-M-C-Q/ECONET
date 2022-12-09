@@ -12,6 +12,12 @@ main {
     background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
 }
 
+.btn-info {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    color: #2D5930;
+}
+
 .top-row {
     background-color: #f7f7f7;
     border-bottom: 1px solid #d6d5d5;
@@ -24,12 +30,12 @@ main {
     .top-row ::deep a, .top-row ::deep .btn-link {
         white-space: nowrap;
         margin-left: 1.5rem;
-        text-decoration: none;
+      
     }
 
-    .top-row ::deep a:hover, .top-row ::deep .btn-link:hover {
-        text-decoration: underline;
-    }
+        /* .top-row ::deep a:hover, .top-row ::deep .btn-link:hover {
+        text-decoration: none;
+    }*/
 
     .top-row ::deep a:first-child {
         overflow: hidden;
@@ -77,5 +83,9 @@ main {
     .top-row, article {
         padding-left: 2rem !important;
         padding-right: 1.5rem !important;
+    }
+
+    .img.logo{
+        display:none;
     }
 }

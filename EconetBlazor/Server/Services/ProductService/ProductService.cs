@@ -43,6 +43,7 @@
             {
                 Data = await _context.Products
                     .Where(p => !p.Deleted)
+                    .Include(p => p.Images)
                     .ToListAsync()
             };
 
@@ -54,6 +55,7 @@
             {
                 Data = await _context.Products
                     .Where(p => p.Featured && p.Visible && !p.Deleted)
+                    .Include(p => p.Images)
                     .ToListAsync()
             };
             return response;
@@ -66,11 +68,13 @@
             if (_httpContextAccessor.HttpContext.User.IsInRole("Admin"))
             {
                 product = await _context.Products
+                    .Include(p => p.Images)
                     .FirstOrDefaultAsync(p => p.Id == productId && !p.Deleted);
             }
             else
             {
                 product = await _context.Products
+                    .Include(p => p.Images)
                     .FirstOrDefaultAsync(p => p.Id == productId && !p.Deleted && p.Visible);
             }
 
@@ -91,6 +95,7 @@
             {
                 Data = await _context.Products
                     .Where(p => p.Visible && !p.Deleted)
+                    .Include(p => p.Images)
                     .ToListAsync()
             };
             return response;
@@ -101,10 +106,12 @@
             {
                 Data = await _context.Products
                     .Where(p => p.Category.Url.ToLower().Equals(categoryUrl.ToLower()) && p.Visible && !p.Deleted)
+                    .Include(p => p.Images)
                     .ToListAsync()
             };
             return response;
         }
+        /*
         public async Task<ServiceResponse<List<string>>> GetProductSearchSuggestions(string searchText)
         {
             var products = await FindProductsBySearchText(searchText);
@@ -145,6 +152,7 @@
                                   .Where(p => p.Title.ToLower().Contains(searchText.ToLower()) ||
                                     p.Description.ToLower().Contains(searchText.ToLower()) &&
                                     p.Visible && !p.Deleted)
+                                   .Include(p => p.Images)
 
                                 .Skip((page - 1) * (int)pageResults)
                                 .Take((int)pageResults)
@@ -162,11 +170,71 @@
 
             return response;
         }
+        */
+        public async Task<ServiceResponse<List<string>>> GetProductSearchSuggestions(string searchText)
+        {
+            var products = await FindProductsBySearchText(searchText);
 
+            List<string> result = new List<string>();
 
+            foreach (var product in products)
+            {
+                if (product.Title.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+                {
+                    result.Add(product.Title);
+                }
+
+                if (product.Description != null)
+                {
+                    var punctuation = product.Description.Where(char.IsPunctuation)
+                        .Distinct().ToArray();
+                    var words = product.Description.Split()
+                        .Select(s => s.Trim(punctuation));
+
+                    foreach (var word in words)
+                    {
+                        if (word.Contains(searchText, StringComparison.OrdinalIgnoreCase)
+                            && !result.Contains(word))
+                        {
+                            result.Add(word);
+                        }
+                    }
+                }
+            }
+
+            return new ServiceResponse<List<string>> { Data = result };
+        }
+
+        public async Task<ServiceResponse<ProductSearchResult>> SearchProducts(string searchText, int page)
+        {
+            var pageResults = 2f;
+            var pageCount = Math.Ceiling((await FindProductsBySearchText(searchText)).Count / pageResults);
+            var products = await _context.Products
+                                .Where(p => p.Title.ToLower().Contains(searchText.ToLower()) ||
+                                    p.Description.ToLower().Contains(searchText.ToLower()) &&
+                                    p.Visible && !p.Deleted)
+                                .Include(p => p.Images)
+                                .Skip((page - 1) * (int)pageResults)
+                                .Take((int)pageResults)
+                                .ToListAsync();
+
+            var response = new ServiceResponse<ProductSearchResult>
+            {
+                Data = new ProductSearchResult
+                {
+                    Products = products,
+                    CurrentPage = page,
+                    Pages = (int)pageCount
+                }
+            };
+
+            return response;
+        }
         public async Task<ServiceResponse<Product>> UpdateProduct(Product product)
         {
-            var dbProduct = await _context.Products.FindAsync(product.Id);
+            var dbProduct = await _context.Products
+              .Include(p => p.Images)
+              .FirstOrDefaultAsync(p => p.Id == product.Id);
             if (dbProduct == null)
             {
                 return new ServiceResponse<Product>
@@ -183,7 +251,10 @@
             dbProduct.Visible = product.Visible;
             dbProduct.Featured = product.Featured;
 
+            var productImages = dbProduct.Images;
+            _context.Images.RemoveRange(productImages);
 
+            dbProduct.Images = product.Images;
             await _context.SaveChangesAsync();
             return new ServiceResponse<Product> { Data = product };
         }

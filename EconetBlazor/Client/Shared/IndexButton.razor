@@ -1,9 +1,10 @@
 ﻿@inject NavigationManager NavigationManager
 
-<button @onclick="GoToIndex"
-        class="btn btn-outline-primary index-button">
-    EcoMart
-</button>
+<a href @onclick="GoToIndex">
+   <img class"eco" src="LOGO-2.svg" alt="Ecomart Logo" style="width:200px;" />
+</a>
+
+
 
 @code {
     private void GoToIndex()
@@ -11,3 +12,4 @@
         NavigationManager.NavigateTo("");
     }
 }
+

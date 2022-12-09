@@ -5,8 +5,8 @@
 @if (address == null)
 {
     <span>
-        You haven't specified a delivery address, yet.
-        <button class="btn" @onclick="InitAddress">Add an address?</button>
+        You haven't specified a delivery address
+        <button class="btn btn-primary" @onclick="InitAddress">Add address</button>
     </span>
 }
 else if (!editAddress)

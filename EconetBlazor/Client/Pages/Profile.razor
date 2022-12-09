@@ -4,9 +4,9 @@
 @attribute [Authorize]
 
 <AuthorizeView>
-    <h3>Hi! You're logged in with <i>@context.User.Identity.Name</i>.</h3>
+    <h3>Hi @context.User.Identity.Name</h3>
 </AuthorizeView>
-
+<p></p>
 <h5>Delivery Address</h5>
 <AddressForm />
 <p></p>

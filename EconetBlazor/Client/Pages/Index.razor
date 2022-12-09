@@ -4,7 +4,8 @@
 @inject IProductService ProductService
 
 <PageTitle>EcoMart</PageTitle>
-
+<div class="col-12 mobile-img">
+        <img  .hero-image src="/images/sky.png"  class="img-fluid" alt="sky"></div>
 <!--display featured products -->
 @if (SearchText == null && CategoryUrl == null)
 {
@@ -14,13 +15,15 @@ else
 {
     <ProductList />
 }
+
+
 @code {
     [Parameter]
     public string? CategoryUrl { get; set; } = null;
 
     [Parameter]
     public string? SearchText { get; set; } = null;
-     
+
     [Parameter]
     public int Page { get; set; } = 1;
 
@@ -28,7 +31,7 @@ else
     {
         if (SearchText != null)
         {
-           await ProductService.SearchProducts(SearchText, Page);
+            await ProductService.SearchProducts(SearchText, Page);
         }
         else
         {
