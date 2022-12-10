@@ -103,13 +103,25 @@ a, .btn-link {
     background-color: #ffffff;
     border-color: #ffffff;
 }
+.btn-check:active + .btn-info, .btn-check:checked + .btn-info, .btn-info.active, .btn-info:active, .btn-info:focus, .show > .btn-info.dropdown-toggle {
+    color: #ffffff;
+    background-color: #2D5930;
+    border-color: #ffffff;
+    box-shadow: none;
+}
 
 .badge:hover {
     color: #71FF98;
 }
 
+.badge:active {
+    color: #ffffff;
+}
+.badge:focus {
+    color: #ffffff;
+}
 
-.featured{
+    .featured{
     font-size:50px;
 }
 button.logo{
@@ -130,9 +142,12 @@ button.btn.btn-secondary {
     border-color: #ffffff;
 }
 
-.hero-image {
+.mobile-img {
     height: 50%;
     background-repeat: no-repeat;
-    background-size: cover;
     position: relative;
+}
+
+.intro{
+
 }

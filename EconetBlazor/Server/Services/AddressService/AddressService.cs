@@ -25,7 +25,7 @@
             {
                 dbAddress.FirstName = address.FirstName;
                 dbAddress.LastName = address.LastName;
-                dbAddress.State = address.State;
+                dbAddress.County = address.County;
                 dbAddress.Country = address.Country;
                 dbAddress.City = address.City;
                 dbAddress.Zip = address.Zip;

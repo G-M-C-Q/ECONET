@@ -11,6 +11,7 @@ namespace EconetBlazor.Shared
         public int ProductId { get; set; }
         public string Title { get; set; } = string.Empty;
         public string ImageUrl { get; set; } = string.Empty;
+        public List<Image> Images { get; set; } = new List<Image>();
         public decimal Price { get; set; }
         public int Quantity { get; set; }
     }

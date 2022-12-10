@@ -14,7 +14,7 @@ else if (!editAddress)
     <p>
         <span>@address.FirstName @address.LastName</span><br />
         <span>@address.Street</span><br />
-        <span>@address.City, @address.State, @address.Zip</span><br />
+        <span>@address.City, @address.County, @address.Zip</span><br />
         <span>@address.Country</span><br />
     </p>
     <button class="btn btn-primary" @onclick="EditAddress">Edit</button>
@@ -39,8 +39,8 @@ else
             <InputText id="city" @bind-Value="address.City" class="form-control" />
         </div>
         <div class="mb-3">
-            <label for="state">State</label>
-            <InputText id="state" @bind-Value="address.State" class="form-control" />
+            <label for="state">County</label>
+            <InputText id="county" @bind-Value="address.County" class="form-control" />
         </div>
         <div class="mb-3">
             <label for="zip">ZIP/Postal Code</label>

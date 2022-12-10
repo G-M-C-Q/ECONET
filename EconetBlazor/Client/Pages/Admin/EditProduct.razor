@@ -64,20 +64,21 @@ else
             <InputTextArea id="description" @bind-Value="product.Description" class="form-control"></InputTextArea>
         </div>
         <hr />
-        <div class="header">
+        
 
-            <div class="col">Price</div>
+          <!--  <div class="col">Price</div>-->
     
-        </div>
+ 
      
         <div class="col">
+            <label for="price">Price</label>
             <InputNumber @bind-Value="product.Price" class="form-control" disabled="@product.Deleted"></InputNumber>
         </div>
       
-        <div class="col col-visible">
+    <!---   <div class="col col-visible">
             <InputCheckbox @bind-Value="product.Visible" style="transform:scale(1.5,1.5);" disabled="@product.Deleted"></InputCheckbox>
         </div>
-
+    -->
         
        
         <hr />
