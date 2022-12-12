@@ -55,8 +55,8 @@ namespace EconetBlazor.Server.Services.PaymentService
                 },
                 LineItems = lineItems,
                 Mode = "payment",
-                SuccessUrl = "https://localhost:7226/order-success",
-                CancelUrl = "https://localhost:7226/cart"
+                SuccessUrl = "https://ecomart.azurewebsites.net/order-success",
+                CancelUrl = "https://ecomart.azurewebsites.net/cart"
             };
 
             var service = new SessionService();

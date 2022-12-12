@@ -3,11 +3,14 @@
     public class ProductService : IProductService
     {
         private readonly HttpClient _http;
+        
 
         public ProductService(HttpClient http)
         {
             _http = http;
         }
+
+
 
         public List<Product> Products { get; set; } = new List<Product>();
         public string Message { get; set; } = "Loading products...";

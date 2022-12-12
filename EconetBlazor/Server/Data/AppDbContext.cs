@@ -4,7 +4,7 @@ namespace EconetBlazor.Server.Data
 {
     public class AppDbContext : DbContext
         {
-            public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
             {
 
             }
@@ -141,4 +141,4 @@ namespace EconetBlazor.Server.Data
             public DbSet<Address> Addresses { get; set; }
              public DbSet<Image> Images { get; set; }
     }
-    }
+}

@@ -19,6 +19,7 @@ namespace EconetBlazor.Server.Controllers
             _productService = productService;
         }
 
+      
 
         [HttpGet("admin"), Authorize(Roles = "Admin")]
         public async Task<ActionResult<ServiceResponse<List<Product>>>> GetAdminProducts()
